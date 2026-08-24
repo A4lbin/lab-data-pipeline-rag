@@ -8,8 +8,6 @@ venv/
 .env
 .env.*
 
-# Generated pipeline output
-data/processed/
 
 # Editor/OS
 .vscode/
