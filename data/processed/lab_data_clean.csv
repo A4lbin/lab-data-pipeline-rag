@@ -1,4 +1,4 @@
-Unnamed: 0,peptide,water,HAuCl4,hepes,Slot,LabwareType,WellCode,WellIndex,UID,peptide_name
+unnamed:_0,peptide,water,haucl4,hepes,slot,labwaretype,wellcode,wellindex,uid,peptide_name
 0,4e-05,1,4e-05,0.0001,4,corning-48-3548,A1,0,2021-07-08MZ2_S4_A1,MZ2
 1,4e-05,1,4e-05,0.001,4,corning-48-3548,B1,1,2021-07-08MZ2_S4_B1,MZ2
 2,4e-05,1,4e-05,0.0,4,corning-48-3548,C1,2,2021-07-08MZ2_S4_C1,MZ2
