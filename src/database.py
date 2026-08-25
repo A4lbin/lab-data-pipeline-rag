@@ -4,4 +4,6 @@ DATABASE = "../database/lab.db"
 
 
 def get_connection():
-    return sqlite3.connect(DATABASE)
+    connection = sqlite3.connect(DATABASE)
+    connection.row_factory = sqlite3.Row
+    return connection
