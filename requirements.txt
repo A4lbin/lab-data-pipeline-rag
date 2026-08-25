@@ -6,4 +6,4 @@ numpy
 
 # Ollama models used by this project
 # - qwen3.5:4b (generation)
-# - nomic-embed-text (embeddings)
+# - nomic-embed-text (embeddings) (switching model)

@@ -1,7 +1,7 @@
 from retrieval import retrieve_all_samples
 from document import samples_to_text
 from embeddings import (
-    create_embedding,
+    # create_embedding,
     create_embeddings
 )
 
@@ -10,9 +10,9 @@ samples = retrieve_all_samples()
 
 documents = samples_to_text(samples)
 
-text = documents[0]["text"]
+# text = documents[0]["text"]
 
-embedding = create_embedding(text)
+# embedding = create_embedding(text)
 
 # print("Text:")
 # print(text)

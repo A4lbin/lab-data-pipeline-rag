@@ -1,4 +1,4 @@
-from embeddings import create_embeddings
+from embeddings import get_embeddings
 from document import samples_to_text
 from retrieval import retrieve_all_samples
 from search import (
@@ -8,7 +8,7 @@ from search import (
 
 samples = retrieve_all_samples()
 documents = samples_to_text(samples)
-embedded_documents = create_embeddings(documents)
+embedded_documents = get_embeddings(documents)
 
 # vector_a = embedded_documents[0]["embedding"]
 # vector_b = embedded_documents[228]["embedding"]
@@ -17,17 +17,51 @@ embedded_documents = create_embeddings(documents)
 # print(score)
 
 
-query = "experiments involving peptide PZ2"
+# query = "experiments involving peptide PZ2"
 
-results = search_documents(
-    query,
-    embedded_documents,
-    top_k=5
-)
+# results = search_documents(
+#     query,
+#     embedded_documents,
+#     top_k=5
+# )
 
-for result in results:
+# for result in results:
 
-    print("UID:", result["uid"])
-    print("Score:", result["score"])
-    print(result["text"])
-    print("--------------------")
+#     print("UID:", result["uid"])
+#     print("Score:", result["score"])
+#     print(result["text"])
+#     print("--------------------")
+
+queries = [
+    "experiments involving peptide PZ2",
+    "experiments involving peptide PZ1",
+    "experiments involving peptide PZ3",
+    "experiments using HAuCl4",
+    "experiments using HEPES",
+    "experiments with a high amount of water",
+    "experiments involving PZ2 with HAuCl4",
+    "experiments involving PZ2 with water",
+    "experiments using different peptides",
+    "experiments with similar conditions to PZ2"
+]
+
+
+# Run every query
+for query in queries:
+
+    print("\n" + "=" * 60)
+    print("QUERY:", query)
+    print("=" * 60)
+
+    results = search_documents(
+        query,
+        embedded_documents,
+        top_k=5
+    )
+
+    for rank, result in enumerate(results, start=1):
+
+        print(f"\nRank: {rank}")
+        print("UID:", result["uid"])
+        print("Score:", round(result["score"], 4))
+        print(result["text"])

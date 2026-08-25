@@ -19,3 +19,5 @@ Thumbs.db
 *.log
 
 src\__pycache__
+data\embeddings\
+
