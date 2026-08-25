@@ -1,5 +1,10 @@
 import numpy as np
-from embeddings import create_embedding
+from embeddings import (
+    create_embedding,
+    create_embeddings,
+    save_embeddings,
+    load_embeddings
+)
 
 def cosine_similarity(vector_a, vector_b):
 
