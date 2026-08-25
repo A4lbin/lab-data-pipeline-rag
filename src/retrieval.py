@@ -36,35 +36,3 @@ def retrieve_all_samples():
 
     return [dict(sample) for sample in samples]
 
-def retrieve_all_as_text():
-
-    samples = retrieve_all_samples()
-
-    documents = []
-
-    for sample in samples:
-        text = sample_to_text(sample)
-
-        documents.append({
-            "uid": sample["uid"],
-            "text": text
-        })
-
-    return documents
-
-# def sample_to_text(sample):
-
-#     return f"""
-#     UID: {sample['uid']}
-#     Peptide: {sample['peptide_name']}
-#     Water: {sample['water']}
-#     HAuCl4: {sample['haucl4']}
-#     HEPES: {sample['hepes']}
-#     Slot: {sample['slot']}
-#     Labware Type: {sample['labwaretype']}
-#     Well Code: {sample['wellcode']}
-#     Well Index: {sample['wellindex']}
-#     """
-
-# documents = retrieve_all_as_text()
-# print(documents)

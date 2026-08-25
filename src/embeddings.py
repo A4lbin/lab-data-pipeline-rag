@@ -18,6 +18,17 @@ def create_embeddings(documents):
         embedding = create_embedding(document["text"])
         embedded_documents.append({
             "uid": document["uid"],
+
+            "peptide": document["peptide"],
+            "peptide_name": document["peptide_name"],
+            "water": document["water"],
+            "haucl4": document["haucl4"],
+            "hepes": document["hepes"],
+            "slot": document["slot"],
+            "labwaretype": document["labwaretype"],
+            "wellcode": document["wellcode"],
+            "wellindex": document["wellindex"],
+            
             "text": document["text"],
             "embedding": embedding
         })

@@ -24,6 +24,19 @@ def samples_to_text(samples):
 
         documents.append({
             "uid": sample["uid"],
+
+            # Metadata
+            "peptide": sample["peptide"],
+            "peptide_name": sample["peptide_name"],
+            "water": sample["water"],
+            "haucl4": sample["haucl4"],
+            "hepes": sample["hepes"],
+            "slot": sample["slot"],
+            "labwaretype": sample["labwaretype"],
+            "wellcode": sample["wellcode"],
+            "wellindex": sample["wellindex"],
+
+            # Text for embedding
             "text": sample_to_text(sample)
         })
 
