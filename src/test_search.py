@@ -34,15 +34,8 @@ embedded_documents = get_embeddings(documents)
 
 queries = [
     "experiments involving peptide PZ2",
-    "experiments involving peptide PZ1",
-    "experiments involving peptide PZ3",
-    "experiments using HAuCl4",
-    "experiments using HEPES",
-    "experiments with a high amount of water",
-    "experiments involving PZ2 with HAuCl4",
-    "experiments involving PZ2 with water",
-    "experiments using different peptides",
-    "experiments with similar conditions to PZ2"
+    "experiments involving peptide Z2M6I",
+    "experiments involving peptide MZ2R"
 ]
 
 

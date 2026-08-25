@@ -19,6 +19,17 @@ def cosine_similarity(vector_a, vector_b):
 
     return similarity
 
+def sparse_similarity(sparse_a, sparse_b):
+
+    score = 0.0
+
+    for token, weight in sparse_a.items():
+
+        if token in sparse_b:
+            score += weight * sparse_b[token]
+
+    return score
+
 def search_documents(query, embedded_documents, top_k=5):
 
     query_embedding = create_query_embedding(query)
@@ -28,9 +39,22 @@ def search_documents(query, embedded_documents, top_k=5):
             query_embedding["dense"],
             document["dense"]
         )
+        dense_score = cosine_similarity(
+        query_embedding["dense"],
+        document["dense"]
+        )
+        sparse_score = sparse_similarity(
+            query_embedding["sparse"],
+            document["sparse"]
+        )
+        hybrid_score = ( 
+        0.7*dense_score +
+        0.3*sparse_score
+        )
         results.append({
             "uid": document["uid"],
             "text": document["text"],
+            # "score": hybrid_score
             "score": score
         })
 
