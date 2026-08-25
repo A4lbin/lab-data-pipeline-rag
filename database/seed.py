@@ -8,7 +8,7 @@ df= pd.read_csv(CSV_FILE)
 
 connection = sqlite3.connect(DATABASE)
 
-df.to_sql("records",connection,if_exists="replace",index=False)
+df.to_sql("samples",connection,if_exists="replace",index=False)
 
 connection.close()
 
