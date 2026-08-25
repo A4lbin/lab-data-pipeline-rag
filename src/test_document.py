@@ -6,4 +6,8 @@ samples = retrieve_all_samples()
 documents = samples_to_text(samples)
 
 print(len(documents))
-print(documents[0])
+for i in documents:
+    # help(i)
+    print(i['text'])
+    print("\n")
+# print(documents)

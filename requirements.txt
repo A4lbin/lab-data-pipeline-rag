@@ -2,3 +2,7 @@ pandas
 ollama
 jupyter
 ipykernel
+
+# Ollama models used by this project
+# - qwen3.5:4b (generation)
+# - nomic-embed-text (embeddings)

@@ -12,6 +12,19 @@ Well Code: {sample['wellcode']}
 Well Index: {sample['wellindex']}
 """.strip()
 
+# def samples_to_text(samples):
+
+#     return [sample_to_text(sample) for sample in samples]
+
 def samples_to_text(samples):
 
-    return [sample_to_text(sample) for sample in samples]
+    documents = []
+
+    for sample in samples:
+
+        documents.append({
+            "uid": sample["uid"],
+            "text": sample_to_text(sample)
+        })
+
+    return documents
