@@ -36,22 +36,26 @@ def create_embedding(text):
     return response["embeddings"][0]
 
 def create_embeddings(documents):
-
+    # print(type(documents))
+    # print(type(documents[0]))
+    # print(documents[0])
     embedded_documents = []
     for document in documents:
         embedding = create_embedding(document["text"])
         embedded_documents.append({
             "uid": document["uid"],
 
-            "peptide": document["peptide"],
-            "peptide_name": document["peptide_name"],
-            "water": document["water"],
-            "haucl4": document["haucl4"],
-            "hepes": document["hepes"],
-            "slot": document["slot"],
-            "labwaretype": document["labwaretype"],
-            "wellcode": document["wellcode"],
-            "wellindex": document["wellindex"],
+            "metadata": {
+                "peptide": document["peptide"],
+                "peptide_name": document["peptide_name"],
+                "water": document["water"],
+                "haucl4": document["haucl4"],
+                "hepes": document["hepes"],
+                "slot": document["slot"],
+                "labwaretype": document["labwaretype"],
+                "wellcode": document["wellcode"],
+                "wellindex": document["wellindex"]
+            },
             
             "text": document["text"],
             "embedding": embedding
@@ -69,17 +73,20 @@ def load_embeddings(filepath):
     with open(filepath, "rb") as file:
         return pickle.load(file)
 
-def get_embeddings(documents):
+def get_embeddings(documents=None):
 
     if os.path.exists(EMBEDDING_FILE):
         print("Loading existing embeddings...")
         return load_embeddings(EMBEDDING_FILE)
-    else:
-        print("Creating embeddings...")
-        embedded_documents = create_embeddings(documents)
-        save_embeddings(embedded_documents,EMBEDDING_FILE)
-        print("Embeddings created and saved.")
-        return embedded_documents
+    if documents is None:
+        raise ValueError("Documents are required to create embeddings.")
+    
+    print("Creating embeddings...")
+    embedded_documents = create_embeddings(documents)
+    save_embeddings(embedded_documents,EMBEDDING_FILE)
+    print("Embeddings created and saved.")
+    
+    return embedded_documents
 
 def filter_embedded_documents(documents, filters):
 
@@ -88,6 +95,11 @@ def filter_embedded_documents(documents, filters):
         return documents
     
     filtered_documents = documents
+
+    def get_field_value(document, field):
+        if field == "uid":
+            return document.get(field)
+        return document.get("metadata", {}).get(field)
 
     for filter_item in filters:
 
@@ -106,7 +118,7 @@ def filter_embedded_documents(documents, filters):
             filtered_documents = [
                 document
                 for document in filtered_documents
-                if document.get(field) == value
+                if get_field_value(document, field) == value
             ]
 
         elif operator == "!=":
@@ -114,7 +126,7 @@ def filter_embedded_documents(documents, filters):
             filtered_documents = [
                 document
                 for document in filtered_documents
-                if document.get(field) != value
+                if get_field_value(document, field) != value
             ]
 
         elif operator == "IN":
@@ -128,7 +140,7 @@ def filter_embedded_documents(documents, filters):
             filtered_documents = [
                 document
                 for document in filtered_documents
-                if document.get(field) in value
+                if get_field_value(document, field) in value
             ]
 
         elif operator == "NOT IN":
@@ -142,7 +154,7 @@ def filter_embedded_documents(documents, filters):
             filtered_documents = [
                 document
                 for document in filtered_documents
-                if document.get(field) not in value
+                if get_field_value(document, field) not in value
             ]
 
         elif operator == ">":
@@ -150,8 +162,8 @@ def filter_embedded_documents(documents, filters):
             filtered_documents = [
                 document
                 for document in filtered_documents
-                if document.get(field) is not None
-                and document.get(field) > value
+                if get_field_value(document, field) is not None
+                and get_field_value(document, field) > value
             ]
 
         elif operator == "<":
@@ -159,8 +171,8 @@ def filter_embedded_documents(documents, filters):
             filtered_documents = [
                 document
                 for document in filtered_documents
-                if document.get(field) is not None
-                and document.get(field) < value
+                if get_field_value(document, field) is not None
+                and get_field_value(document, field) < value
             ]
 
         elif operator == ">=":
@@ -168,8 +180,8 @@ def filter_embedded_documents(documents, filters):
             filtered_documents = [
                 document
                 for document in filtered_documents
-                if document.get(field) is not None
-                and document.get(field) >= value
+                if get_field_value(document, field) is not None
+                and get_field_value(document, field) >= value
             ]
 
         elif operator == "<=":
@@ -177,8 +189,8 @@ def filter_embedded_documents(documents, filters):
             filtered_documents = [
                 document
                 for document in filtered_documents
-                if document.get(field) is not None
-                and document.get(field) <= value
+                if get_field_value(document, field) is not None
+                and get_field_value(document, field) <= value
             ]
 
     return filtered_documents
