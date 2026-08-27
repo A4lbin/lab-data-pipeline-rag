@@ -1,5 +1,5 @@
 import numpy as np
-from embeddings import (
+from .embeddings import (
     create_embedding,
     create_embeddings,
     save_embeddings,

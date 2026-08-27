@@ -1,6 +1,6 @@
-from retrieval import retrieve_all_samples
-from document import samples_to_text
-from embeddings import (
+from .retrieval import retrieve_all_samples
+from .document import samples_to_text
+from .embeddings import (
     create_embedding,
     create_embeddings,
     get_embeddings,

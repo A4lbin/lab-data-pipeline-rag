@@ -1,10 +1,11 @@
-from retrieval import retrieve_all_samples
-from document import samples_to_text
+from .retrieval import retrieve_all_samples
+from .document import samples_to_text
 
-from embeddings import (
+from .embeddings import (
     create_embeddings,
     save_embeddings
 )
+from pathlib import Path
 
 
 samples = retrieve_all_samples()
@@ -15,7 +16,8 @@ embedded_documents = create_embeddings(documents)
 
 save_embeddings(
     embedded_documents,
-    "../data/embeddings/bge_m3_embeddings.pkl"
+    Path(__file__).resolve().parent.parent
+    / "data" / "embeddings" / "bge_m3_embeddings.pkl"
 )
 
 print("Embeddings saved.")

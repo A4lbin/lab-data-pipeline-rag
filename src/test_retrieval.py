@@ -1,4 +1,4 @@
-from retrieval import (
+from .retrieval import (
     retrieve_sample_by_uid,
     retrieve_samples_by_peptide,
     retrieve_samples_by_well,

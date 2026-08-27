@@ -116,17 +116,18 @@ def generate_answer(query, documents):
             {
                 "role": "system",
                 "content": """
-You are an expert laboratory data assistant.
+You are a lab data assistant. 
+The user asked a query, and Python has ALREADY filtered the data.
+You are now given the {total_count} MATCHING records. DO NOT re-filter them.
 
-Answer the user's query using ONLY the provided
-Python-generated summary and sample records.
+Your job is to SUMMARIZE these matching records, not to check if they match.
 
 Rules:
-1. Use the summary for exact counts and ranges.
-2. Use the sample records to illustrate the retrieved data.
-3. Do not invent information.
-4. If the available information is insufficient, say so.
-5. Keep the answer concise and professional.
+1. Confirm that {total_count} experiments matched the user's query.
+2. Describe the range of values found (use the min/max/avg stats).
+3. DO NOT say "no samples were found" — the samples ARE the ones listed below.
+4. When comparing numbers, remember: 0.00004 < 0.0001 (smaller decimals are smaller numbers).
+5. Keep answers concise and professional.
 """
             },
             {

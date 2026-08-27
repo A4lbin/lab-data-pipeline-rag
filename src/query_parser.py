@@ -1,6 +1,7 @@
 import ollama
 import json
-from embeddings import (ALLOWED_FIELDS,ALLOWED_OPERATORS)
+
+from .embeddings import ALLOWED_FIELDS, ALLOWED_OPERATORS
 
 FILTER_SCHEMA = {
     "type": "object",

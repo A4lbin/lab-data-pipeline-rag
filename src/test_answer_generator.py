@@ -1,6 +1,6 @@
-from query_parser import parse_query
-from embeddings import get_embeddings, filter_embedded_documents,EMBEDDING_FILE
-from answer_generator import generate_answer
+from .query_parser import parse_query
+from .embeddings import get_embeddings, filter_embedded_documents, EMBEDDING_FILE
+from .answer_generator import generate_answer
 
 
 # Load your embedded documents

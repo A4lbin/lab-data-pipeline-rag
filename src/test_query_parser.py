@@ -1,5 +1,5 @@
-from query_parser import parse_query
-from embeddings import filter_embedded_documents,get_embeddings,EMBEDDING_FILE
+from .query_parser import parse_query
+from .embeddings import filter_embedded_documents, get_embeddings, EMBEDDING_FILE
 
 
 TEST_QUERIES = [

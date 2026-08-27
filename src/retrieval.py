@@ -1,10 +1,10 @@
-from queries import (
+from .queries import (
     get_sample_by_uid,
     get_samples_by_peptide,
     get_samples_by_well,
     get_all_samples
 )
-from document import sample_to_text
+from .document import sample_to_text
 
 def retrieve_sample_by_uid(uid):
 

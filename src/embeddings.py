@@ -1,8 +1,12 @@
 import ollama
 import pickle
 import os
+from pathlib import Path
 
-EMBEDDING_FILE = "../data/embeddings/nomic_embed_text_embeddings.pkl"
+EMBEDDING_FILE = str(
+    Path(__file__).resolve().parent.parent
+    / "data" / "embeddings" / "nomic_embed_text_embeddings.pkl"
+)
 
 ALLOWED_FIELDS = {
     "uid",

@@ -1,7 +1,7 @@
-from embeddings import get_embeddings
-from document import samples_to_text
-from retrieval import retrieve_all_samples
-from search import (
+from .embeddings import get_embeddings
+from .document import samples_to_text
+from .retrieval import retrieve_all_samples
+from .search import (
     cosine_similarity,
     search_documents
 )

@@ -1,9 +1,19 @@
+# Data processing
 pandas
+
+# Ollama Python client for embeddings, query parsing, and answer generation
 ollama
-jupyter
-ipykernel
+
+# Streamlit application
+streamlit
+
+# Vector similarity search
 numpy
 
-# Ollama models used by this project
-# - qwen3.5:4b (generation)
-# - nomic-embed-text (embeddings)
+# Notebook support
+jupyter
+ipykernel
+
+# Runtime models are installed separately with Ollama:
+# ollama pull qwen3.5:4b
+# ollama pull nomic-embed-text

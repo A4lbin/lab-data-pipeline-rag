@@ -1,4 +1,4 @@
-from database import get_connection
+from .database import get_connection
 
 ALLOWED_FIELDS = {
     "uid",
