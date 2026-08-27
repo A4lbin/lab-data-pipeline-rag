@@ -15,5 +15,6 @@ jupyter
 ipykernel
 
 # Runtime models are installed separately with Ollama:
+# ollama pull qwen3:1.7b
 # ollama pull qwen3.5:4b
 # ollama pull nomic-embed-text

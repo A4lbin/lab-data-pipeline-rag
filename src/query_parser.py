@@ -37,7 +37,7 @@ FILTER_SCHEMA = {
 
 def parse_query(query):
     response = ollama.chat(
-        model="qwen3.5:4b",
+        model="qwen3:1.7b",
         messages=[
             {
                 "role": "system",
@@ -84,7 +84,7 @@ CRITICAL RULES FOR VALUES:
         ],
         format=FILTER_SCHEMA,
     )
-    
+    print("Getting filters from query...")
     parsed = json.loads(response["message"]["content"])
     
     # --- POST-PROCESSING ---

@@ -21,3 +21,4 @@ Thumbs.db
 src\__pycache__
 
 data/embeddings/
+map.md

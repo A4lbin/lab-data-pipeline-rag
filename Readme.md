@@ -1,6 +1,6 @@
 # Lab Data Pipeline RAG
 
-A Streamlit-based question-answering application for laboratory experiment data. It transforms raw CSV records into a searchable SQLite dataset, creates cached local embeddings, converts natural-language questions into structured metadata filters, and generates concise answers from the matching experiments. The workflow uses Ollama's `nomic-embed-text` model for embeddings and the `qwen3.5:4b` model for both query parsing and answer generation.
+A Streamlit-based question-answering application for laboratory experiment data. It transforms raw CSV records into a searchable SQLite dataset, creates cached local embeddings, converts natural-language questions into structured metadata filters, and generates concise answers from the matching experiments. The workflow uses Ollama's `nomic-embed-text` model for embeddings, `qwen3:1.7b` for query parsing, and `qwen3.5:4b` for answer generation.
 
 ## Overview
 
@@ -10,7 +10,7 @@ This repository combines:
 - SQLite-based sample storage and lookup
 - retrieval helpers that convert database rows into text documents
 - cached local embeddings using the `nomic-embed-text` embedding model
-- natural-language query parsing with `qwen3.5:4b`
+- natural-language query parsing with `qwen3:1.7b`
 - answer generation with `qwen3.5:4b` using filtered experiment records
 - a Streamlit interface for interactive questions
 
@@ -58,11 +58,13 @@ pip install -r requirements.txt
 
 This project uses Ollama for two model-powered stages:
 
-- `qwen3.5:4b` for natural-language query parsing and answer generation
+- `qwen3:1.7b` for natural-language query parsing
+- `qwen3.5:4b` for answer generation
 - `nomic-embed-text` for document embeddings
 
 ```bash
 ollama pull qwen3.5:4b
+ollama pull qwen3:1.7b
 ollama pull nomic-embed-text
 ```
 
@@ -85,7 +87,7 @@ The application:
 1. Loads sample records from SQLite.
 2. Converts the records into text documents with metadata.
 3. Loads cached embeddings, or creates and saves them if the cache does not exist.
-4. Converts the question into structured filters with `qwen3.5:4b`.
+4. Converts the question into structured filters with `qwen3:1.7b`.
 5. Filters embedded documents using the returned metadata filters.
 6. Generates an answer with `qwen3.5:4b` from the matching experiment records.
 
@@ -205,7 +207,7 @@ python -m src.test_filter_embedded_documents_embeddings
 
 ## Natural-language RAG workflow
 
-`src/query_parser.py` uses `qwen3.5:4b` to convert a natural-language question into validated structured filters. `src/answer_generator.py` summarizes the matching records and uses the same `qwen3.5:4b` model to produce a concise answer using only that summary and sample records.
+`src/query_parser.py` uses `qwen3:1.7b` to convert a natural-language question into validated structured filters. `src/answer_generator.py` summarizes the matching records and uses `qwen3.5:4b` to produce a concise answer using only that summary and sample records.
 
 Run the interactive workflow with:
 
