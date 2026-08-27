@@ -73,13 +73,13 @@ def load_embeddings(filepath):
     with open(filepath, "rb") as file:
         return pickle.load(file)
 
-def get_embeddings(documents=None):
+def get_embeddings(documents):
 
     if os.path.exists(EMBEDDING_FILE):
         print("Loading existing embeddings...")
         return load_embeddings(EMBEDDING_FILE)
-    if documents is None:
-        raise ValueError("Documents are required to create embeddings.")
+    # if documents is None:
+    #     raise ValueError("Documents are required to create embeddings.")
     
     print("Creating embeddings...")
     embedded_documents = create_embeddings(documents)
@@ -130,9 +130,9 @@ def filter_embedded_documents(documents, filters):
             ]
 
         elif operator == "IN":
-
+            
             if not isinstance(value, list):
-                raise ValueError("IN requires a list")
+                value = [value]
 
             if not value:
                 continue
@@ -146,7 +146,7 @@ def filter_embedded_documents(documents, filters):
         elif operator == "NOT IN":
 
             if not isinstance(value, list):
-                raise ValueError("NOT IN requires a list")
+                value = [value]
 
             if not value:
                 continue
