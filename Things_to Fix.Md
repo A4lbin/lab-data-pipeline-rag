@@ -7,3 +7,5 @@ llm takes too much time and repeated queries take too long to retrn answer
 
 ## Only metadata filtering has been implemented.
 semantic RAG hasnt really been utilised till this point.
+
+## the app doesnt really have a history of chats and queries

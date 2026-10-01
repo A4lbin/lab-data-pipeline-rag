@@ -12,7 +12,7 @@ This repository combines:
 - cached local embeddings using the `nomic-embed-text` embedding model
 - natural-language query parsing with `qwen3:1.7b`
 - answer generation with `qwen3.5:4b` using filtered experiment records
-- a Streamlit interface for interactive questions
+- a two-page Streamlit interface for natural-language search and manual record filtering
 
 ## Prerequisites
 
@@ -74,7 +74,10 @@ https://ollama.com/download
 
 ## Streamlit application
 
-The main application is implemented in `app.py`. Enter a natural-language question about the laboratory experiments and select **Search** to run the RAG workflow.
+The application is implemented in `app.py` and contains two pages:
+
+- **Ask the Lab**: enter a natural-language question and use the LLM to parse filters, retrieve matching experiments, display the results in a table, and generate an answer.
+- **All Records**: browse every experiment and apply manual filters directly to the SQLite database.
 
 From the project root, start the application with:
 
@@ -85,11 +88,12 @@ streamlit run app.py
 The application:
 
 1. Loads sample records from SQLite.
-2. Converts the records into text documents with metadata.
+2. Converts the records into text documents with metadata for the **Ask the Lab** page.
 3. Loads cached embeddings, or creates and saves them if the cache does not exist.
-4. Converts the question into structured filters with `qwen3:1.7b`.
+4. Converts a natural-language question into structured filters with `qwen3:1.7b`.
 5. Filters embedded documents using the returned metadata filters.
-6. Generates an answer with `qwen3.5:4b` from the matching experiment records.
+6. Displays matching records in a table and generates an answer with `qwen3.5:4b`.
+7. Uses the database retrieval helpers on the **All Records** page for direct manual filtering without the LLM.
 
 After Streamlit starts, open `http://localhost:8501` in a browser.
 
@@ -99,9 +103,17 @@ After Streamlit starts, open `http://localhost:8501` in a browser.
 
 ![Streamlit user interface](screenshots/1.png)
 
-### Search results
+### Query and Table
 
-![Streamlit search results](screenshots/2.png)
+![Query with records](screenshots/2.png)
+
+### Answer
+
+![Table and Answer to Query](screenshots/3.png)
+
+### All records page with Manual filtering
+
+![All records page with Manual filtering](screenshots/4.png)
 
 ## Data pipeline
 
@@ -152,6 +164,8 @@ The project includes query helpers in `src/queries.py`:
 - `get_all_samples()`
 
 The retrieval layer in `src/retrieval.py` wraps these queries and converts rows into structured dictionaries or text documents.
+
+It also provides `retrieve_samples_by_filters(filters)` for applying the same structured filters directly to the database.
 
 ### Example
 
