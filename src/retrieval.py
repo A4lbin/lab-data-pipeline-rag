@@ -2,7 +2,8 @@ from .queries import (
     get_sample_by_uid,
     get_samples_by_peptide,
     get_samples_by_well,
-    get_all_samples
+    get_all_samples,
+    filter_samples
 )
 from .document import sample_to_text
 
@@ -33,6 +34,13 @@ def retrieve_samples_by_well(wellcode):
 def retrieve_all_samples():
 
     samples = get_all_samples()
+
+    return [dict(sample) for sample in samples]
+
+
+def retrieve_samples_by_filters(filters):
+
+    samples = filter_samples(filters)
 
     return [dict(sample) for sample in samples]
 
