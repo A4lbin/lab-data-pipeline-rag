@@ -17,7 +17,8 @@ This repository combines:
 ## Prerequisites
 
 - Python 3.10+
-- Ollama installed and running locally
+- Docker Desktop with Docker Compose
+- Ollama installed and running locally, if using the **Ask the Lab** LLM page
 - Access to the data files in the repository
 
 ## Setup
@@ -72,6 +73,38 @@ If Ollama is not installed, download it from:
 
 https://ollama.com/download
 
+## Run with Docker
+
+Docker is the recommended way to run the complete Streamlit application. The container uses Python 3.12, installs the packages from `requirements.txt`, and starts `app.py` on port `8501`.
+
+Before starting the container, make sure Ollama is running on the host and the required models are installed:
+
+```bash
+ollama pull qwen3.5:4b
+ollama pull qwen3:1.7b
+ollama pull nomic-embed-text
+```
+
+Build and start the application from the project root:
+
+```bash
+docker compose up --build
+```
+
+Open `http://localhost:8501` in a browser. Stop the application with:
+
+```bash
+docker compose down
+```
+
+The Compose configuration connects the container to host Ollama through `host.docker.internal`. It also mounts these directories so data survives container rebuilds:
+
+- `database/` for the SQLite database
+- `data/embeddings/` for the cached embedding file
+
+To use a different Ollama endpoint, copy `.env.example` to `.env` and change `OLLAMA_HOST`.
+
+
 ## Streamlit application
 
 The application is implemented in `app.py` and contains two pages:
@@ -84,6 +117,8 @@ From the project root, start the application with:
 ```bash
 streamlit run app.py
 ```
+
+Alternatively, use the Docker workflow described above.
 
 The application:
 

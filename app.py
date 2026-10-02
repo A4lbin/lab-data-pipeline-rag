@@ -30,6 +30,10 @@ st.markdown(
         background-color: #E4FFE1;
     }
 
+    [data-testid="stSidebarNav"] [data-testid="stIconMaterial"] {
+        color: #6A8D73 !important;
+    }
+
     h1, h2, h3, p, label,
     [data-testid="stCaptionContainer"],
     [data-testid="stMarkdownContainer"] {
@@ -175,7 +179,7 @@ def ask_lab_page():
             _style_records(
                 _documents_to_dataframe(st.session_state.llm_results)
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
         st.caption(
@@ -227,7 +231,7 @@ def records_page():
             key="record_value",
         )
 
-        if st.button("Add filter", use_container_width=True):
+        if st.button("Add filter", width="stretch"):
             values = [item.strip() for item in value_text.split(",")]
             if not value_text.strip() or any(not item for item in values):
                 st.warning("Enter one or more values before adding a filter.")
@@ -250,7 +254,7 @@ def records_page():
                     })
                     st.rerun()
 
-        if st.button("Clear filters", use_container_width=True):
+        if st.button("Clear filters", width="stretch"):
             st.session_state.record_filters = []
             st.rerun()
 
@@ -270,7 +274,7 @@ def records_page():
     st.metric("Matching records", len(records))
     st.dataframe(
         _style_records(records),
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
